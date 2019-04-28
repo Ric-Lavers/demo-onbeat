@@ -4,9 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { bpm } from './onbeat';
-import { rAFLoop } from './onbeat/loops'
-import onBeat, { setBeatMark, bpmToMs } from './onbeat/methods'
+import onBeat from './onbeat/methods'
 
 
 const on = Symbol('on')

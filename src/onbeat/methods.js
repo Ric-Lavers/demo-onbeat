@@ -1,9 +1,4 @@
-import { beatMark, bpm, custom } from './index.js'
 
-const customMark = (currentMark, mark) => (
-  window[custom][mark]
-    && window[custom][mark].includes(currentMark)
-)
 /**
  * 
  * @param {*} bpm 
@@ -245,10 +240,20 @@ export const promiseStep = (mark, cb) => new Promise((resolve, reject) => {
   window.requestAnimationFrame(step)
 })
 
+const checkCustomMark = (currentMark, mark) => {
+  currentMark = ['16th','8th','4th'].includes(mark) 
+        ? currentMark[1]
+        : currentMark
+  return (
+    window[mark]
+      && window[mark].includes(currentMark)
+  )
+}
+
 export const asyncStep = async (mark, cb) =>{
   let step = () => {
 
-    if (window['beatMark'] === mark || customMark(window['beatMark'], mark) ) {
+    if (window['beatMark'] === mark || checkCustomMark(window['beatMark'], mark) ) {
       return cb(`_${mark}_`)
     }
     if(window['beatMark'] !== mark ){

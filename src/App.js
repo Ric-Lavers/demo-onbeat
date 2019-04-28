@@ -3,7 +3,13 @@ import logo from './logo.svg';
 import './App.css';
 import { hello } from './api/mock'
 
-import { asyncStep, promiseStep } from './onbeat/methods'
+// import { asyncStep, promiseStep } from './onbeat/methods'
+import Onbeat from './onbeat/methods'
+const onBeat = new Onbeat(140, 8, 4, {
+  customMarks: {
+    snare: [ '2&', '4&', '6&', '8&' ]
+  }
+})
 
 // const step = new Step()
 
@@ -23,20 +29,20 @@ class App extends React.Component{
   getMock = async () => {
     this.setState({ data: {} })
     let data = await hello()
-    asyncStep(
+    onBeat.asyncStep(
       '3&',
       () => this.setState({ data }),
     )
   }
   handleChange = value => {
-    asyncStep(
+    onBeat.asyncStep(
       '2e',
       () => this.setState({ value })
     )
   }
   handleClick = () => {
-    asyncStep(
-      'snare',
+    onBeat.asyncStep(
+      1,
       () => this.setState({show: !this.state.show})
     )
   }

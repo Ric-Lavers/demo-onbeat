@@ -1,30 +1,8 @@
-import { globalWindow } from './utils'
+const onBeat = require('./methods').default
 
-export const beatMark = Symbol('beatMark')
-export const bpm = Symbol('bpm')
-export const stop = Symbol('stop')
-export const custom = Symbol('custom')
-
-window[beatMark] = '0';
-window[bpm] = 120;
-window[stop] = false;
-window[custom] = {
-  'default': ['1-'],
-  'snare': [ '2&', '4&' ],
-  'kick': [ '1-', '2-', '3-', '4-' ],
-
-  '16th': [],
-  '8th': [],
-  '4th': [ '1-', '2-', '3-', '4-' ],
+module.exports = {
+  onBeat: onBeat,
 }
-
-var wrAF = window.requestAnimationFrame
-
-
-// module.exports = {
-//   setup: () => {},
-//   onBeat: () => {},
-// }
 
 /* 
 Singletons
