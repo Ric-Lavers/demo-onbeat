@@ -9,12 +9,13 @@ window[beatMark] = '0';
 window[bpm] = 120;
 window[stop] = false;
 window[custom] = {
+  'default': ['1-'],
   'snare': [ '2&', '4&' ],
   'kick': [ '1-', '2-', '3-', '4-' ],
+
   '16th': [],
   '8th': [],
   '4th': [ '1-', '2-', '3-', '4-' ],
-  'default': ['1-'],
 }
 
 var wrAF = window.requestAnimationFrame
@@ -24,3 +25,9 @@ var wrAF = window.requestAnimationFrame
 //   setup: () => {},
 //   onBeat: () => {},
 // }
+
+/* 
+Singletons
+https://www.youtube.com/watch?v=bgU7FeiWKzc
+http://wiki.c2.com/?SingletonPattern
+*/

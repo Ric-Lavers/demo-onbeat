@@ -6,16 +6,42 @@ import * as serviceWorker from './serviceWorker';
 
 import { bpm } from './onbeat';
 import { rAFLoop } from './onbeat/loops'
-import { setBeatMark, bpmToMs } from './onbeat/methods'
+import onBeat, { setBeatMark, bpmToMs } from './onbeat/methods'
 
 
+const on = Symbol('on')
+window['on'] =  on
+
+window['onBeat'] = onBeat
+const houseBeat = new onBeat(126, 16, 4)
+const stepBeat = new onBeat(140, 16, 4)
+const dubBeat = new onBeat(70, 16, 2)
+
+window[on] =  {
+  houseBeat,
+  stepBeat,
+  dubBeat,
+}
+
+stepBeat.asyncStep(6, console.log)
+stepBeat.asyncStep(12, console.log)
+
+/* 
+
+ window['dubBeat'] = dubBeat
+  window.requestAnimationFrame(ts => dubBeat.wRAF_LOOP(ts, dubBeat.getBeatMark) )
+ */
+
+/* 
 rAFLoop(
   t => {
-    setBeatMark(bpmToMs(15), 8)(t);
+    // setBeatMark(bpmToMs(120), 4)(t);
+    window['beatMark'] = houseBeat.getBeatMark()
     document.getElementById('beatmark').innerText = window['beatMark']
   },
   { repeat: true }
-)
+) */
+
 
 
 
