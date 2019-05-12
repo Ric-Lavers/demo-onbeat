@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
+/* 
 import onBeat from './onbeat/methods'
 
 
@@ -23,7 +23,7 @@ window[on] =  {
 
 stepBeat.asyncStep(6, console.log)
 stepBeat.asyncStep(12, console.log)
-
+ */
 /* 
 
  window['dubBeat'] = dubBeat

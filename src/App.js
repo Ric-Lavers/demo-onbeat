@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react'
+// import OnBeat from 'onbeat'
+import OnBeat from './onBeat.ts'
+import OnBeat_2 from './onBeat_2.ts'
+
 import logo from './logo.svg';
 import './App.css';
 import { hello } from './api/mock'
 
-// import { asyncStep, promiseStep } from './onbeat/methods'
-import Onbeat from './onbeat/methods'
-const onBeat = new Onbeat(140, 8, 4, {
+const onBeat = new OnBeat(140, 8, 4, {
+  customMarks: {
+    snare: [ '2&', '4&', '6&', '8&' ]
+  }
+})
+const onBeat_2 = new OnBeat_2(140, 8, 4, {
   customMarks: {
     snare: [ '2&', '4&', '6&', '8&' ]
   }
 })
 
-// const step = new Step()
+window['onBeat'] = onBeat
+window['ob'] = onBeat_2
 
 class App extends React.Component{
   state = {
     value: "...",
     show: false,
     data: {},
+    i: null,
     // timer: Math.round(window.performance.now())/1000,
   }
   componentDidMount(){
@@ -26,6 +35,17 @@ class App extends React.Component{
     //   this.setState({ timer: Math.round(window.performance.now())/1000 })
     // }, 500);
   }
+
+  somethingExpensive = () => {
+    let now = Date.now()
+    let i = 0
+    do {
+      i++
+    } while (Date.now() - now < 5000)
+    
+    return i
+  }
+
   getMock = async () => {
     this.setState({ data: {} })
     let data = await hello()
@@ -36,23 +56,29 @@ class App extends React.Component{
   }
   handleChange = value => {
     onBeat.asyncStep(
-      '2e',
+      '16th',
       () => this.setState({ value })
     )
   }
   handleClick = () => {
+    let i = this.somethingExpensive()
     onBeat.asyncStep(
-      1,
-      () => this.setState({show: !this.state.show})
+      3,
+      () => {
+        this.setState({
+          show: !this.state.show,
+          i
+        })
+      }
     )
   }
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
           {this.state.show &&
           <img src={logo} className="App-logo" alt="logo" />}
-          {/* <p>{this.state.timer}</p> */}
           <h1 id="beatmark" >not defined</h1>
           {JSON.stringify(this.state)}
           <input
